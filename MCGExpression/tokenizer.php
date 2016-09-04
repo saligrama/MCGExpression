@@ -97,14 +97,20 @@
 
     function tokenize($expr) {
 
+        // remove leading and trailing spaces
         $expr = preg_replace('/\G\s|\s(?=\s*$)/', '', format($expr));
-        $tokens = array_map('trim', explode(' ', preg_replace('/[ ]+/', ' ', $expr)));
-        $tokens_ret = fix_minus($tokens);
+
+        // replace >=2 spaces with only one space and explode to array
+        // then make all minuses unary
+        $tokens = fix_minus(array_map('trim', explode(' ', preg_replace('/[ ]+/', ' ', $expr))));
+
+        // get count removing parentheses to reduce steps in shunting_yard()
         $count = 0;
-        foreach ($tokens_ret as $token) {
+        foreach ($tokens as $token) {
             $count = (!preg_match("/(" . $GLOBALS["format_regexes"]["lparen"] . "|" . $GLOBALS["format_regexes"]["rparen"] . ")/", $token)) ? $count + 1 : $count;
         }
-        return [$tokens_ret, $count];
+        // return array with tokenized array and count
+        return [$tokens, $count];
 
     }
 
