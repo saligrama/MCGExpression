@@ -91,7 +91,7 @@
             $GLOBALS["format_replaces"]["paren_space"], // add spaces before and after lparen and rparen
         ];
 
-        return preg_replace($regexes, $replaces, $expr);
+        return strtoupper(preg_replace($regexes, $replaces, $expr));
 
     }
 
