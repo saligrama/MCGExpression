@@ -6,6 +6,9 @@
         if ($arr1 == $arr2)
             return true;
 
+        elseif (count($arr1) != count($arr2))
+            return false;
+
         else {
 
             // otherwise run usual block_compare
@@ -16,6 +19,7 @@
         }
 
     }
+
     // compare simplest order operation
     // $e1, $e2 each have one unary operator and two special constant/numerical operands
     function simple_compare($e1, $e2) {
@@ -55,10 +59,16 @@
         $e1_min = min(array_keys($e1));
         $e2_min = min(array_keys($e2));
 
+        // if lengths are different they are not the same
+        if (count($e1) != count($e2)) {
+            $compares[] = 0;
+            return $compares;
+        }
         // if each block is a unary function block only, go to unary_func_compare
-        if ($e1[$e1_min]["type"] == "function" && $e2[$e2_min]["type"] == "function")
+        elseif ($e1[$e1_min]["type"] == "function" && $e2[$e2_min]["type"] == "function") {
             $compares = unary_func_compare($e1, $e2, $compares);
-
+            return $compares;
+        }
         else {
 
             // expr operators
@@ -156,8 +166,8 @@
 
                 }
                 elseif (($e1_operator["symbol"] == "+" || $e1_operator["symbol"] == "*") &&
-                        $e1_op1_iscblock && $e2_op2_iscblock &&
-                        !in_array(unary_func_compare($e1_op1, $e2_op2, $interm_compares))) {
+                        $e1_op1_isublock && $e2_op2_isublock &&
+                        !in_array(0, unary_func_compare($e1_op1, $e2_op2, $interm_compares))) {
 
                     $compares[] = 1;
                     $interm_compares = [];
@@ -184,11 +194,9 @@
                 else {
                     $compares[] = 0;
                 }
-
+                return $compares;
             }
         }
-        return $compares;
-
     }
 
     // compare unary functions
@@ -209,14 +217,12 @@
         $e1_op_min = min(array_keys($e1_op));
         $e2_op_min = min(array_keys($e2_op));
 
-        if ($e1_function["name"] != $e2_function["name"])
+        if ($e1_function["name"] != $e2_function["name"]) {
             $compares[] = 0;
-
-        else {
-
-            $compares = template_compare($e1_op, $e2_op, $compares);
-
         }
+
+        else
+            $compares = template_compare($e1_op, $e2_op, $compares);
 
         return $compares;
 
