@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-    require("newslice.php");
+    require("new_slice.php");
     require("unary_minus.php");
     require("tokenizer.php");
     require("shunting_yard.php");

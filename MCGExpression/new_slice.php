@@ -3,7 +3,7 @@
     // PHP's default array_slice doesn't support arrays without zero index.
     // Therefore, this is a new function, written in PHP, to add this functionality.
     // Assume keys are all numerical, consecutive, and in increasing order.
-    function newSlice($input_arr, $offset, $length = NULL, $preserve_keys = false) {
+    function new_slice($input_arr, $offset, $length = NULL, $preserve_keys = false) {
 
         // error checking for $offset
         if (!isset($input_arr[$offset]))
@@ -18,14 +18,14 @@
                 // if $preserve_keys is set to true, $output_arr is treated like
                 // an associative array with numerical keys
                 if ($preserve_keys) {
-                    for ($cur = $offset; $cur < $offset + $length; $cur++) {
+                    for ($cur = $offset, $end = $offset + $length; $cur < $end; $cur++) {
                         $output_arr[$cur] = $input_arr[$cur];
                     }
                 }
                 // otherwise the keys are ignored and elements are simply added
                 // to $output_arr
                 else {
-                    for ($cur = $offset; $cur < $offset + $length; $cur++) {
+                    for ($cur = $offset, $end = $offset + $length; $cur < $end; $cur++) {
                         $output_arr[] = $input_arr[$cur];
                     }
                 }

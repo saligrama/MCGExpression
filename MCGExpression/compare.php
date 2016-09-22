@@ -76,12 +76,12 @@
             $e2_operator = $e2[$e2_min];
 
             // find expr operand blocks
-            $e1_op1 = newSlice($e1, $e1[$e1_min]["op1_ndx"],
+            $e1_op1 = new_slice($e1, $e1[$e1_min]["op1_ndx"],
                                ($e1[$e1_min]["op2_ndx"] - $e1[$e1_min]["op1_ndx"]), true);
-            $e1_op2 = newSlice($e1, $e1[$e1_min]["op2_ndx"], NULL, true);
-            $e2_op1 = newSlice($e2, $e2[$e2_min]["op1_ndx"],
+            $e1_op2 = new_slice($e1, $e1[$e1_min]["op2_ndx"], NULL, true);
+            $e2_op1 = new_slice($e2, $e2[$e2_min]["op1_ndx"],
                                ($e2[$e2_min]["op2_ndx"] - $e2[$e2_min]["op1_ndx"]), true);
-            $e2_op2 = newSlice($e2, $e2[$e2_min]["op2_ndx"], NULL, true);
+            $e2_op2 = new_slice($e2, $e2[$e2_min]["op2_ndx"], NULL, true);
 
             $e1_op1_min = min(array_keys($e1_op1));
             $e1_op2_min = min(array_keys($e1_op2));
@@ -211,8 +211,8 @@
         $e2_function = $e2[$e2_min];
 
         // get operands
-        $e1_op = newSlice($e1, $e1[$e1_min]["op_ndx"], NULL, true);
-        $e2_op = newSlice($e2, $e2[$e2_min]["op_ndx"], NULL, true);
+        $e1_op = new_slice($e1, $e1[$e1_min]["op_ndx"], NULL, true);
+        $e2_op = new_slice($e2, $e2[$e2_min]["op_ndx"], NULL, true);
 
         $e1_op_min = min(array_keys($e1_op));
         $e2_op_min = min(array_keys($e2_op));
