@@ -29,7 +29,7 @@ In `MCGExpression/main.php`, you'll find these contents.
 
 ?>
 ```
-In this state, the system does not do anything. You can add something like this to the end.
+In this state, the system does nothing. You can add something like this to the end.
 
 ```php
 $expr1 = "-3-7SQRT(8PI-1)";
@@ -40,7 +40,7 @@ $e2_tok = tokenize($expr2);
 
 echo compare(
     shunting_yard($e1_tok[0], $e1_tok[1]),
-    shunting_yard($e2_tok[0], $e2_tok[1]),
+    shunting_yard($e2_tok[0], $e2_tok[1])
 );
 ```
 
