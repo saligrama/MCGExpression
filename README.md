@@ -55,3 +55,15 @@ The result from the code above:
     1
 
 You can change the values for `$expr1` and `$expr2` and play around with the system.
+
+Constants and functions can be entered as below:
+
+| Constant/function | Enter as |
+| ----------------- | -------- |
+| π | `PI` |
+| √ | `SQRT` |
+| e | `E` |
+| i | `I` |
+| sin, cos, tan, and other functions | Uppercased text representation |
+
+For more details, please view the `declare_globals()` function in `MCGExpression/tokenizer.php`.
