@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
     require("new_slice.php");
