@@ -35,8 +35,7 @@
                 return true;
             }
             // cross compare (first op2 and second op1 and converse) if commutative operator
-            elseif (($e1[$e1_min]["symbol"] == "+" ||
-                     $e1[$e1_min]["symbol"] == "*") &&
+            elseif (($GLOBALS["operators"][$e1[$e1_min]["symbol"]]['commutativity'] === true) &&
                      $e1[$e1_min + 1] == $e2[$e2_min + 2] &&
                      $e1[$e1_min + 2] == $e2[$e2_min + 1]) {
                 return true;
@@ -129,7 +128,7 @@
 
                 }
 
-                elseif (($e1_operator["symbol"] == "+" || $e1_operator["symbol"] == "*")
+                elseif (($GLOBALS["operators"][$e1_operator["symbol"]]['commutativity'] === true)
                          && $e1_op1_issblock && $e2_op2_issblock && simple_compare($e1_op1, $e2_op2)) {
 
                     $compares[] = 1;
@@ -146,7 +145,7 @@
 
 
                 }
-                elseif (($e1_operator["symbol"] == "+" || $e1_operator["symbol"] == "*") &&
+                elseif (($GLOBALS["operators"][$e1_operator["symbol"]]['commutativity'] === true) &&
                          $e1_op1_iscblock && $e2_op2_iscblock &&
                          !in_array(0, block_compare($e1_op1, $e2_op2, $interm_compares))) {
 
@@ -165,7 +164,7 @@
 
 
                 }
-                elseif (($e1_operator["symbol"] == "+" || $e1_operator["symbol"] == "*") &&
+                elseif (($GLOBALS["operators"][$e1_operator["symbol"]]['commutativity'] === true) &&
                         $e1_op1_isublock && $e2_op2_isublock &&
                         !in_array(0, unary_func_compare($e1_op1, $e2_op2, $interm_compares))) {
 
@@ -183,7 +182,7 @@
 
 
                 }
-                elseif (($e1_operator["symbol"] == "+" || $e1_operator["symbol"] == "*")
+                elseif (($GLOBALS["operators"][$e1_operator["symbol"]]['commutativity'] === true)
                          && $e1_op1_isval && $e2_op2_isval &&
                          $e1_op1[$e1_op1_min]["value"] == $e2_op2[$e2_op2_min]["value"]) {
 

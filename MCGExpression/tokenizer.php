@@ -3,12 +3,15 @@
     function declare_globals() {
 
         // operators
+        // presence of OR as operator for answers with multiple answers (i.e., roots of a quadratic)
+        // - is used as a function, not as an operator, to deal with unary minuses (i.e "-3+12PI")
         $GLOBALS["operators"] = [
-            '+' => ['precedence' => 0, 'associativity' => 'left'],
-            '*' => ['precedence' => 1, 'associativity' => 'left'],
-            '/' => ['precedence' => 1, 'associativity' => 'left'],
-            '%' => ['precedence' => 1, 'associativity' => 'left'],
-            '^' => ['precedence' => 2, 'associativity' => 'right'],
+            '+' => ['precedence' => 0, 'associativity' => 'left', 'commutativity' => true],
+            '*' => ['precedence' => 1, 'associativity' => 'left', 'commutativity' => true],
+            '/' => ['precedence' => 1, 'associativity' => 'left', 'commutativity' => false],
+            '%' => ['precedence' => 1, 'associativity' => 'left'], 'commutativity' => false],
+            '^' => ['precedence' => 2, 'associativity' => 'right', 'commutativity' => false],
+            'OR' => ['precedence' => 3, 'associativity' => 'left', 'commutativity' => true],
         ];
 
         // specials
@@ -37,7 +40,7 @@
             "lparen" => "(\()",
             "rparen" => "(\))",
             "function" => "(SQRT|ABS|ACOS|COS|ATAN|TAN|ASIN|SIN|CEIL|FLOOR|LOG|LN)",
-            "operator" => "(\+|\-|\*|\/)",
+            "operator" => "(\+|\-|\*|\/|\^|OR)",
             "suffix" => "(%|$)"
         ];
 
