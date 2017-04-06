@@ -9,9 +9,9 @@
             '+' => ['precedence' => 0, 'associativity' => 'left', 'commutativity' => true],
             '*' => ['precedence' => 1, 'associativity' => 'left', 'commutativity' => true],
             '/' => ['precedence' => 1, 'associativity' => 'left', 'commutativity' => false],
-            '%' => ['precedence' => 1, 'associativity' => 'left'], 'commutativity' => false],
+            '%' => ['precedence' => 1, 'associativity' => 'left', 'commutativity' => false],
             '^' => ['precedence' => 2, 'associativity' => 'right', 'commutativity' => false],
-            'OR' => ['precedence' => 3, 'associativity' => 'left', 'commutativity' => true],
+            'OR' => ['precedence' => -1, 'associativity' => 'left', 'commutativity' => true]
         ];
 
         // specials

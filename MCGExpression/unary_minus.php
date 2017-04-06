@@ -75,8 +75,12 @@
     // check if a plus should be added before a minus
     // do not add a plus if the minus is the first thing in the array
     // or if it is the first thing after a left parenthesis
+    // or if it is the first thing after a lower precedence operator
     function add_plus($input, $pos) {
-        return !($pos == 0 || (isset($input[$pos-1]) && $input[$pos-1] == '('));
+        return !($pos == 0 ||
+                 (isset($input[$pos-1]) && ($input[$pos-1] == '(' ||
+                  isset($GLOBALS['operators'][$input[$pos-1]]) &&
+                  $GLOBALS['operators'][$input[$pos-1]]['precedence'] < 0)));
     }
 
     // inject rparen to complete minus operand wrapping
@@ -87,9 +91,10 @@
         // track if parens were ever open (for case of minuses in parenthesis)
         $ever_open_paren = false;
         for ($i = $pos, $c = count($input); $i < $c; $i++) {
-            // if no parens are open and we hit something with equal precedence as minus
+            // if no parens are open and we hit something with <= precedence as minus
             // complete the rparen
-            if ($open_paren_count == 0 && ($input[$i] == '+' || $input[$i] == '-')) {
+            if ($open_paren_count == 0 && isset($GLOBALS['operators'][$input[$i]]) &&
+                $GLOBALS['operators'][$input[$i]]['precedence'] <= 1) {
                 array_splice($input, $i, 0, ')');
                 break;
             }
